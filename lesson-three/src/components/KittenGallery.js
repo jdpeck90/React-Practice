@@ -1,5 +1,5 @@
-const CLIENT_ID = 'f94e76572eaeb8f13a25';
-const CLIENT_SECRET = 'c4dc4846c5401744e331b8ffffb3a7913fda7e89';
+const CLIENT_ID =
+const CLIENT_SECRET =
 var AUTH = btoa(CLIENT_ID + ':' + CLIENT_SECRET);
 import axios from 'axios';
 import ShutterStockGallery from './ShutterStockGallery';
@@ -25,7 +25,6 @@ class KittenGallery extends Component {
                 Authorization: 'Basic ' + AUTH
             }
         }).then(function (response) {
-          {console.log(response,'response')};
             var images = response.data.data.map(function (image) {
                 return {
                     url: image.assets.preview.url,
