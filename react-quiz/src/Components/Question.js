@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 class Question extends Component {
-    onChange() {
-        return;
+    onChange(e) {
+        e.preventDefault();
+        const {setCurrent, setScore, question} = this.props;
+
+        let selected = e.target.value;
+        //Add a point to total score if correct anwser chosen
+        if(selected == question.correct){
+            setScore(this.props.score+1)
+        }
+
+        setCurrent(this.props.current+1);
     }
-  render() {
-      const {question} = this.props;
+    render() {
+        const {question} = this.props;
 
     return (
       <div className="well" style={{textAlign:'left'}}>
@@ -17,9 +26,9 @@ class Question extends Component {
                 this.props.question.choices.map(choice => {
                    return(
                        <li className="list-group-item" key={choice.id}>
+                    
                        {choice.id} <input type="radio" onChange={this.onChange.bind(this)} name={question.id} value={choice.id} /> {choice.text}
                        </li>
-
                    ) 
                 })
             }
