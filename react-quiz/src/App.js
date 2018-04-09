@@ -1,18 +1,78 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import QuestionList from './Components/QuestionList.js'
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      questions:[
+        {
+          id:1,
+          text: "what is your name?",
+          choices: [
+            {
+              id: 'a',
+              text: 'Michael'
+            },
+            {
+              id: 'b',
+              text: 'Bob'
+            },
+            {
+              id: 'c',
+              text: 'Bill'
+            }
+          ],
+          correct: 'b'
+      },
+        {
+          id:2,
+          text: "what is your Mother's name?",
+          choices: [
+            {
+              id: 'a',
+              text: 'Teri'
+            },
+            {
+              id: 'b',
+              text: 'Jennifer'
+            },
+            {
+              id: 'c',
+              text: 'Marry'
+            }
+          ],
+          correct: 'a'
+      },
+        {
+          id:3,
+          text: "what is your Father's name?",
+          choices: [
+            {
+              id: 'a',
+              text: 'Paul'
+            },
+            {
+              id: 'b',
+              text: 'John'
+            },
+            {
+              id: 'c',
+              text: 'Gary'
+            }
+          ],
+          correct: 'c'
+      }
+    ],
+    score:0,
+    current:1
+    }
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <QuestionList {...this.state}/>
       </div>
     );
   }
