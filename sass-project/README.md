@@ -6,7 +6,7 @@
   - npm install create-react-app if you don't have
   - install globally with the **-g** flag
   ______________________________ 
-- Change File Structure 
+- Change File Structure git
   ______________________________ 
 |  Todo -CMDline | Create | 
 | ------------- |:-------------:| 
