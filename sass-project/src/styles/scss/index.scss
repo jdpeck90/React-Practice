@@ -1,4 +1,8 @@
 @import 'App';
+// Here we import our partials
+@import "_partials/mixins";
+@import "_partials/variables";
+@import "_partials/typography";
 
 $primary-color: #333;
 
