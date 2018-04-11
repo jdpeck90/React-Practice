@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Data extends Component {
     constructor(props) {
         super(props);
+        //data to import to App.js
         this.state = { 
             data: [
                 {"id": 1,"title": "Child Bride"}, 
@@ -19,6 +20,7 @@ class Data extends Component {
          }
     }
     render() { 
+        //structuring data
         return ( 
             <div>
                 <ul>
@@ -28,13 +30,8 @@ class Data extends Component {
                                 {info.id} - {info.title}
                                     </li>
                         })
-
-
-
-
                     }
                 </ul>
-
             </div>
          )
     }
