@@ -1,0 +1,9 @@
+@import 'App';
+
+$primary-color: #333;
+
+.App {
+    .App-header {
+        color: $primary-color;
+    }
+}
