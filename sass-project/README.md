@@ -5,16 +5,16 @@
   - create-react-app your-app-name
   - npm install create-react-app if you don't have
   - install globally with the **-g** flag
-  ______________________________
-- Change File Structure
-  | Todo -CMDline    |  Create                    |
-  |------------------|:---------------------------|
-  |mkdir styles      | src/styles                 |
-  |mk css            | src/styles/css             |
-  |mk scss           | src/styles/scss            | 
-  |mv index.css      | src/styles/scss/index.scss |
-  |mv App.css        | src/styles/scss/App.scss   |
-  ______________________________
+  ______________________________ 
+- Change File Structure 
+  | Todo -CMDline    |  Create                    |  
+  |------------------|:---------------------------| 
+  |mkdir styles      | src/styles                 | 
+  |mk css            | src/styles/css             | 
+  |mk scss           | src/styles/scss            |  
+  |mv index.css      | src/styles/scss/index.scss | 
+  |mv App.css        | src/styles/scss/App.scss   | 
+  ______________________________ 
 - Change `import './index.css'` in src/index.js;
   - Change to `import './styles/css/index.css';`
   - ![Change Import Parth](./md-images/import.png "Change Import Parth")
