@@ -11,10 +11,10 @@
 |  Todo -CMDline | Create | 
 | ------------- |:-------------:| 
 | mkdir styles | src/styles |
-| mk css | src/styles/css |  
-| mk scss | src/styles/scss |   
-|mv index.css | src/styles/scss/index.scss | 
-|mv App.css | src/styles/scss/App.scss |
+| mk styles/css | src/styles/css |  
+| mk styles/scss | src/styles/scss |   
+|mv index.css ./src/styles/scss/ | src/styles/scss/index.scss | 
+|mv App.css ./src/styles/scss/ | src/styles/scss/App.scss |
 
 
 

@@ -1,0 +1,20 @@
+{
+    "name": "github-viewer",
+    "description": "Get and display user github info",
+    "main": "index.js",
+    "authors": [
+      "Justin Peck"
+    ],
+    "license": "ISC",
+    "ignore": [
+      "**/.*",
+      "node_modules",
+      "bower_components",
+      "test",
+      "tests"
+    ],
+    "dependencies": {
+      "bootstrap": "^3.3.6",
+      "jquery": "1.12.0"
+    }
+  }
