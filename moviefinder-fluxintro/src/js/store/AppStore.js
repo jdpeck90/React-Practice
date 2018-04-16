@@ -1,33 +1,38 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var AppConstants = require('../dispatcher/AppConstants');
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-var AppAPI = require('./utils/appAPI.js');
+var React = require('react');
+var AppActions = require('../actions/AppActions');
+var AppStore = require('../store/AppStore');
+var SearchForm = require('./SearchForm.js')
 
-var CHANGE_EVENT = 'change';
-
-var _movies = [];
-var _selected = '';
-
-var AppStore = assign({}, EventEmitter.prototype,{
-    emitChange: function(){
-        this.emitChange(CHANGE_EVENT)
-    },
-    addChangeListener: function(cb){
-        this.on('change', cb)
-    },
-    removeChangeListener: function(cb){
-        this.removeListener('change', cb)
+function getAppState() {
+    return {
+        movies: AppStore.getMoviesResults()
     }
-})
+}
 
-AppDispatcher.register(function(payload){
-    var action = payload.action;
-
-    switch(action.actionType){
-
+class App extends React.Component {
+   
+    getInitialState() {
+        return getAppState();
     }
-    return true;
-});
+  componentDidMount() {
+    AppStore.addChangeListener(this._onChange);
 
-module.exports = AppStore;
+  }
+  componentWillUnmount() {
+    AppStore.removeChangeListener(this._onChange);
+
+  }
+  render() {
+    return (
+      <div className="App">
+        <SearchForm />
+      </div>
+    );
+  }
+
+  _onChange() {
+    this.setState(getAppState())
+  }
+}
+
+export default App;
