@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "browserify": "*",
+    "jquery": "^3.3.1",    
     "flux": "*",
     "gulp": "*",
     "object-assign": "*",
@@ -15,6 +16,7 @@
     "vinyl-source-stream": "*"
   },
   "dependencies": {
+    "jquery": "^3.3.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7"
   },
