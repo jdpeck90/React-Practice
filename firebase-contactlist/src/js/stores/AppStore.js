@@ -7,15 +7,18 @@ var AppAPI = require('../utils/AppAPI');
 
 var CHANGE_EVENT = "change";
 
-var _movies = [];
-var _selected = '';
+var _contacts = [];
 
 var AppStore = assign({}, EventEmitter.prototype, {
-    setMovieResults(movies) {
-        _movies = movies
+    getContacts: function() {
+       return _contacts;
     },
-    getMovieResults: function(){
-        return _movies;
+    saveContact: function(contact) {
+        _contacts.push(contact);
+    },
+    setContacts: function(contacts) {
+        console.log('from Store',contacts)
+        _contacts: contacts;
     },
     emitChange: function(){
         this.emitChange(CHANGE_EVENT);
@@ -32,8 +35,29 @@ AppDispatcher.register(function(payload){
     var action = payload.action;
 
     switch(action.actionType){
-      
-    }
+        case AppConstants.SAVE_CONTACT:
+            console.log('saving contact');
+
+            //StoreSave
+            AppStore.saveContact(action.contact);
+
+            //Save to API
+            AppAPI.saveContact(action.contact)
+
+            //Emit Change
+            AppStore.emit(CHANGE_EVENT);
+            break;
+
+        case AppConstants.RECIEVE_CONTACTS:
+            console.log('receiving Contacts...');
+
+            //get contacts
+            AppStore.setContacts(action.contacts);
+
+            //Emit Change
+            AppStore.emit(CHANGE_EVENT);
+            break;
+   }
         return true;
 })
 
