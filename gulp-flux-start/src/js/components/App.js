@@ -24,7 +24,7 @@ var App = React.createClass({
 
         return (
             <div>
-              Hi From Here!
+              Hi From App.js!
             </div>
         )
     },
@@ -32,6 +32,6 @@ var App = React.createClass({
     _onChange: function(){
         this.setState(getAppState())
 }
-};
+})
 
 module.exports = App;
