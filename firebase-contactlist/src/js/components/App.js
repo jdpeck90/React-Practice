@@ -1,10 +1,13 @@
 var React = require('react');
 var AppActions = require('../actions/AppActions');
 var AppStore = require('../stores/AppStore');
+var AddForm = require('./AddForm.js')
+var ContactList = require('./ContactList.js')
+
 //holds all state values
 function getAppState() {
     return {
-        movies: AppStore.getMovieResults()
+         contacts: AppStore.getContacts()
     }
 }
 
@@ -21,10 +24,12 @@ var App = React.createClass({
     },
     //will render the app
     render: function(){
-
+        console.log(this.state.contacts)
+        console.log(this.props)
         return (
             <div>
-              Hi From Here!
+              <AddForm />
+              <ContactList contacts={this.state.contacts}/>
             </div>
         )
     },
@@ -32,6 +37,6 @@ var App = React.createClass({
     _onChange: function(){
         this.setState(getAppState())
 }
-};
+})
 
 module.exports = App;

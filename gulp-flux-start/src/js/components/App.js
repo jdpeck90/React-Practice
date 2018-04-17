@@ -4,7 +4,7 @@ var AppStore = require('../stores/AppStore');
 //holds all state values
 function getAppState() {
     return {
-        movies: AppStore.getMovieResults()
+        
     }
 }
 
