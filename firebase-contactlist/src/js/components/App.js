@@ -1,7 +1,7 @@
 var React = require('react');
 var AppActions = require('../actions/AppActions');
 var AppStore = require('../stores/AppStore');
-
+//holds all state values
 function getAppState() {
     return {
         movies: AppStore.getMovieResults()
@@ -9,6 +9,7 @@ function getAppState() {
 }
 
 var App = React.createClass({
+    //the initial state
     getInitialState: function(){
         return getAppState();
     },
@@ -18,6 +19,7 @@ var App = React.createClass({
     componentWillUnmount: function(){
         AppStore.removeChangeListener(this._onChange)
     },
+    //will render the app
     render: function(){
 
         return (
@@ -26,7 +28,7 @@ var App = React.createClass({
             </div>
         )
     },
-    
+    //will change render to new state
     _onChange: function(){
         this.setState(getAppState())
 }
