@@ -7,16 +7,9 @@ var AppAPI = require('../utils/AppAPI');
 
 var CHANGE_EVENT = "change";
 
-var _movies = [];
-var _selected = '';
+var _items = [];
 
 var AppStore = assign({}, EventEmitter.prototype, {
-    setMovieResults(movies) {
-        _movies = movies
-    },
-    getMovieResults: function(){
-        return _movies;
-    },
     emitChange: function(){
         this.emitChange(CHANGE_EVENT);
     },
