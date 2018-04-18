@@ -29,6 +29,8 @@ module.exports = {
        });
     },
 
+
+    //Can't remove from DB b/c of CORS issue. Need to figure out work around.
     //Remove note from mongoDB
     removeNote: function(noteId){
         $.ajax({
