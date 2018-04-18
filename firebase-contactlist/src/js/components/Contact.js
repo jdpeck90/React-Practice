@@ -10,12 +10,18 @@ var Contact = React.createClass({
                 <td>{this.props.contact.phone}</td>
                 <td>{this.props.contact.email}</td>
                 <td>
-                    <a href="#" className="btn btn-default" onClick={this.handleEdit}>Edit</a>
-                    <a href="#" className="btn btn-danger" onClick={this.handleRemove.bind(this, this.props.contact.id)}>Edit</a>
+                    <a href="#" className='btn btn-default' onClick={this.handleEdit.bind(this, this.props.contact)}>Edit</a>
+                    <a href="#" className='btn btn-danger' onClick={this.handleDelete.bind(this, this.props.contact.id)}>Delete</a>
                 </td>
             </tr>
         )
+    },
+    handleDelete: function(i, j) {
+        AppActions.removeContact(i)
+    },
+    handleEdit: function(i, j) {
+        AppActions.editContact(i)
     }
 })
 
-module.exports = Contact
+module.exports = Contact;
