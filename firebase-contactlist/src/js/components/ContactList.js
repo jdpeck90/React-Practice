@@ -4,7 +4,7 @@ var AppStore = require('../stores/AppStore');
 var Contact = require('./Contact.js');
 
 var ContactList = React.createClass({
-    render: function () {
+    render: function() {
         return (
             <div>
                 <h3>Contacts</h3>
@@ -12,13 +12,18 @@ var ContactList = React.createClass({
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
                             <th>Phone</th>
+                            <th>Email</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {console.log('this from contactList', this)
+                        {
+                            this.props.contacts.map(function(contact, index){
+                                return (
+                                    <Contact contact={contact} key={index} />
+                                )
+                            })
                         }
                     </tbody>
                 </table>
@@ -27,4 +32,4 @@ var ContactList = React.createClass({
     }
 })
 
-module.exports = ContactList
+module.exports = ContactList;
