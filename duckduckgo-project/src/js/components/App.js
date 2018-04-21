@@ -1,6 +1,10 @@
 var React = require('react');
 var AppActions = require('../actions/AppActions');
 var AppStore = require('../stores/AppStore');
+var SearchForm = require('./SearchForm');
+var SearchResults = require('./SearchResults');
+
+
 //holds all state values
 function getAppState() {
     return {
@@ -24,7 +28,8 @@ var App = React.createClass({
 
         return (
             <div>
-              Hi From App.js!
+              <SearchForm />
+              <SearchResults />
             </div>
         )
     },
