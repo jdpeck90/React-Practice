@@ -30362,12 +30362,24 @@ var AppDispatcher = require('../dispatcher/AppDispatcher')
 var AppConstants = require('../constants/AppConstants')
 
 var AppActions = {
-   
+   searchText: function(search){
+       AppDispatcher.handleViewAction({
+           actionType:AppConstants.SEARCH_TEXT,
+           search: search
+       })
+   },
+   receiveResults: function(results) {
+       console.log('from actions',results);
+    AppDispatcher.handleViewAction({
+        actionType:AppConstants.RECEIVE_RESULTS,
+        results: results
+    })
+   }
 }
 
 module.exports = AppActions;
 
-},{"../constants/AppConstants":169,"../dispatcher/AppDispatcher":170}],166:[function(require,module,exports){
+},{"../constants/AppConstants":170,"../dispatcher/AppDispatcher":171}],166:[function(require,module,exports){
 var React = require('react');
 var AppActions = require('../actions/AppActions');
 var AppStore = require('../stores/AppStore');
@@ -30378,7 +30390,8 @@ var SearchResults = require('./SearchResults');
 //holds all state values
 function getAppState() {
     return {
-        
+        results: AppStore.getResults(),
+        searchText: AppStore.getSearchText()
     }
 }
 
@@ -30399,7 +30412,7 @@ var App = React.createClass({displayName: "App",
         return (
             React.createElement("div", null, 
               React.createElement(SearchForm, null), 
-              React.createElement(SearchResults, null)
+              React.createElement(SearchResults, {searchText: this.state.searchText, results: this.state.results})
             )
         )
     },
@@ -30411,21 +30424,21 @@ var App = React.createClass({displayName: "App",
 
 module.exports = App;
 
-},{"../actions/AppActions":165,"../stores/AppStore":172,"./SearchForm":167,"./SearchResults":168,"react":164}],167:[function(require,module,exports){
+},{"../actions/AppActions":165,"../stores/AppStore":173,"./SearchForm":168,"./SearchResults":169,"react":164}],167:[function(require,module,exports){
 var React = require('react');
 var AppActions = require('../actions/AppActions');
 var AppStore = require('../stores/AppStore');
 
 
 
-var SearchForm = React.createClass({displayName: "SearchForm",
+var Result = React.createClass({displayName: "Result",
   
     //will render the app
     render: function(){
-
+       
         return (
             React.createElement("div", null, 
-             "Search Form"
+             React.createElement("p", {className: "content lead", dangerouslySetInnerHTML: {__html:this.props.result.Result}})
             )
         )
     },
@@ -30433,23 +30446,70 @@ var SearchForm = React.createClass({displayName: "SearchForm",
   
 })
 
-module.exports = SearchForm;
+module.exports = Result;
 
-},{"../actions/AppActions":165,"../stores/AppStore":172,"react":164}],168:[function(require,module,exports){
+},{"../actions/AppActions":165,"../stores/AppStore":173,"react":164}],168:[function(require,module,exports){
 var React = require('react');
 var AppActions = require('../actions/AppActions');
 var AppStore = require('../stores/AppStore');
 
+var SearchForm = React.createClass({displayName: "SearchForm",
+
+    //will render the app
+    render: function () {
+
+        return (
+            React.createElement("div", null, 
+                React.createElement("form", {onSubmit: this.searchText, className: "well"}, 
+
+                    React.createElement("div", {className: "form-group"}, 
+                        React.createElement("label", null, "Search For Something"), 
+                        React.createElement("input", {text: "text", ref: "text", className: "form-control"})
+                    )
+                )
+            )
+        )
+    },
+    //will change render to new state
+
+    searchText: function(e){
+        e.preventDefault();
+        var search = {
+            text: this.refs.text.value.trim()
+        }
+        AppActions.searchText(search)
+    }
+})
+
+module.exports = SearchForm;
+
+},{"../actions/AppActions":165,"../stores/AppStore":173,"react":164}],169:[function(require,module,exports){
+var React = require('react');
+var AppActions = require('../actions/AppActions');
+var AppStore = require('../stores/AppStore');
+var Result = require('./Result')
 
 
 var SearchResults = React.createClass({displayName: "SearchResults",
   
     //will render the app
     render: function(){
-
+        if(this.props.searchText != '') {
+            var results =  React.createElement("h2", {className: "page-header"}, "Results for ", this.props.searchText)
+        } else {
+            var results = '';
+        }
         return (
             React.createElement("div", null, 
-             "Search Results"
+                results, 
+                console.log('from SearchResults',this.props), 
+                
+                    this.props.results.map(function(result, idx){
+                      return (
+                          React.createElement(Result, {result: result, key: idx})
+                      )
+                    })
+                
             )
         )
     },
@@ -30459,12 +30519,13 @@ var SearchResults = React.createClass({displayName: "SearchResults",
 
 module.exports = SearchResults;
 
-},{"../actions/AppActions":165,"../stores/AppStore":172,"react":164}],169:[function(require,module,exports){
+},{"../actions/AppActions":165,"../stores/AppStore":173,"./Result":167,"react":164}],170:[function(require,module,exports){
 module.exports = {
-    
+    SEARCH_TEXT: 'SEARCH_TEXT',
+    RECEIVE_RESULTS: 'RECEIVE_RESULTS'
 }
 
-},{}],170:[function(require,module,exports){
+},{}],171:[function(require,module,exports){
 var Dispatcher = require('flux').Dispatcher;
 var assign =require('object-assign');
 
@@ -30480,7 +30541,7 @@ var AppDispatcher = assign(new Dispatcher(), {
 
 module.exports = AppDispatcher;
 
-},{"flux":29,"object-assign":33}],171:[function(require,module,exports){
+},{"flux":29,"object-assign":33}],172:[function(require,module,exports){
 var App = require('./components/App.js');
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -30493,7 +30554,7 @@ ReactDOM.render(
     document.getElementById('app')
 );
 
-},{"./components/App.js":166,"./utils/AppAPI.js":173,"react":164,"react-dom":35}],172:[function(require,module,exports){
+},{"./components/App.js":166,"./utils/AppAPI.js":174,"react":164,"react-dom":35}],173:[function(require,module,exports){
 var AppDispatcher = require('../dispatcher/AppDispatcher')
 var AppConstants = require('../constants/AppConstants')
 var EventEmitter = require('events').EventEmitter;
@@ -30503,10 +30564,22 @@ var AppAPI = require('../utils/AppAPI');
 
 var CHANGE_EVENT = "change";
 
-var items = [];
+var _results = [];
+var _searchText = '';
 
 var AppStore = assign({}, EventEmitter.prototype, {
-
+    setSearchText: function(search){
+        _searchText = search.text;  
+    },
+    getSearchText: function(){
+        return _searchText;
+    },
+    setResults: function(results){
+        _results = results;
+    },  
+    getResults: function(){
+        return _results;
+    },
     emitChange: function(){
         this.emitChange(CHANGE_EVENT);
     },
@@ -30522,19 +30595,44 @@ AppDispatcher.register(function(payload){
     var action = payload.action;
 
     switch(action.actionType){
-      
+       case AppConstants.SEARCH_TEXT:
+        AppAPI.searchText(action.search);
+        AppStore.setSearchText(action.search);
+        AppStore.emit(CHANGE_EVENT);
+        
+        break;
+        case AppConstants.RECEIVE_RESULTS:
+        AppStore.setResults(action.results)
+        AppStore.emit(CHANGE_EVENT);
+        break;
     }
         return true;
 })
 
 module.exports = AppStore;
 
-},{"../constants/AppConstants":169,"../dispatcher/AppDispatcher":170,"../utils/AppAPI":173,"events":1,"object-assign":33}],173:[function(require,module,exports){
+},{"../constants/AppConstants":170,"../dispatcher/AppDispatcher":171,"../utils/AppAPI":174,"events":1,"object-assign":33}],174:[function(require,module,exports){
 var AppActions = require('../actions/AppActions.js');
 var $ = require('jquery');
 
 module.exports = {
-   
+    searchText: function (search) {
+        console.log('search from API' + search.text)
+
+        var url = 'http://duckduckgo.com/?q=' + search.text + '&format=json&pretty=1'
+        $.ajax({
+            url: url,
+            dataType: "jsonp",
+            cache: false,
+            success: function(data){
+                console.log(data.RelatedTopics)
+                AppActions.receiveResults(data.RelatedTopics);
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.log(err);
+            }.bind(this)
+        })
+    }
 }
 
-},{"../actions/AppActions.js":165,"jquery":32}]},{},[171]);
+},{"../actions/AppActions.js":165,"jquery":32}]},{},[172]);
