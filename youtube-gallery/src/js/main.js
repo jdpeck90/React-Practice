@@ -3,7 +3,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var AppAPI = require('./utils/AppAPI.js');
 
-
+AppAPI.getVideos()
 
 ReactDOM.render(
     <App />, 
