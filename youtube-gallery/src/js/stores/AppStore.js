@@ -7,10 +7,15 @@ var AppAPI = require('../utils/AppAPI');
 
 var CHANGE_EVENT = "change";
 
-var items = [];
+var _videos = [];
 
 var AppStore = assign({}, EventEmitter.prototype, {
-
+    saveVideo: function(video){
+        _videos.push(video)
+    },
+    getVideos: function(){
+       return _videos;
+    },
     emitChange: function(){
         this.emitChange(CHANGE_EVENT);
     },
@@ -26,7 +31,15 @@ AppDispatcher.register(function(payload){
     var action = payload.action;
 
     switch(action.actionType){
-      
+        case AppConstants.SAVE_VIDEO:
+            console.log('saving video');
+            //Store Save
+            AppStore.saveVideo(action.type)
+            
+            //API Save
+            AppAPI.saveVideo(action.type)    
+
+            AppStore.emit(CHANGE_EVENT)
     }
         return true;
 })

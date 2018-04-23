@@ -1,5 +1,5 @@
 {
-  "name": "firebase contact list",
+  "name": "youtube-gallery",
   "version": "1.0.0",
   "description": "Contact List using Firebase as Database",
   "main": "main.js",
@@ -16,6 +16,7 @@
     "vinyl-source-stream": "*"
   },
   "dependencies": {
+    "firebase": "^2.3.2",
     "jquery": "^3.3.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7"
