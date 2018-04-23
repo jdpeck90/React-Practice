@@ -32,7 +32,6 @@ var AddForm = React.createClass({
         )
     },
 
-
     //will change render to new state
     onSubmit: function(e){
         e.preventDefault();
@@ -42,7 +41,8 @@ var AddForm = React.createClass({
             video_id:  this.refs.video_id.value.trim(),
             description: this.refs.description.value.trim()
         }
-        
+        console.log('submitted....', video)
+        AppActions.saveVideo(video);
     }
 })
 
