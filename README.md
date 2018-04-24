@@ -15,7 +15,7 @@ This quick displays questions from a JSON object, counts score, and gives you a 
 6. [Sticky Pad Project](https://github.com/jdpeck90/React-Practice/tree/master/react-quiz)
 7. [DuckDuckGo Info Finder](https://github.com/jdpeck90/React-Practice/tree/master/duckduckgo-project)
 8. [Youtube Gallery](https://github.com/jdpeck90/React-Practice/tree/master/youtube-gallery) 
-9. [Websocket Chat App]
+9. [Websocket Chat App](https://github.com/jdpeck90/React-Practice/tree/master/websocket-chat-app)
 10. [Work Out Logger]
  
 
