@@ -1,7 +1,7 @@
 {
-  "name": "react_webpack_starter",
+  "name": "second_try_at_chat_app",
   "version": "1.0.0",
-  "description": "Chat Application using Socket.io + React",
+  "description": "Chat App Built W/ React & Websocket",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
@@ -11,10 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "express": "*",
-    "socket.io": "*",
-    "socket.io-client": "*s"
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
