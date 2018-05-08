@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Link} from 'react-router';
 
-class HomePage extends Component {
+class HomePage extends React.Component {
    
     render() {
         return (
@@ -15,5 +15,4 @@ class HomePage extends Component {
 }
 
 export default HomePage;
-
 

@@ -1,30 +1,30 @@
-import express from 'express'; // server module
-import webpack from 'webpack'; 
+import express from 'express';
+import webpack from 'webpack';
 import path from 'path';
 import config from '../webpack.config.dev';
 import open from 'open';
 
 /* eslint-disable no-console */
 
-const port = 3000; //port the app will run on
-const app = express(); //call instance of express
-const compiler = webpack(config); //calling config of webpack which we defined in webpack
+const port = 3000;
+const app = express();
+const compiler = webpack(config);
 
-app.use(require('webpack-dev-middleware')(compiler, { //pass webpack into express
-  noInfo: true, // we don't want information on the command line
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
   publicPath: config.output.publicPath
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('*', function(req, res) { //telling webpack which files we want it to serve
+app.get('*', function(req, res) {
   res.sendFile(path.join( __dirname, '../src/index.html'));
 });
 
-app.listen(port, function(err) { //telling webpack where we want this app to run
+app.listen(port, function(err) {
   if (err) {
     console.log(err);
   } else {
-    open(`http://localhost:${port}`); //local host 3000
+    open(`http://localhost:${port}`);
   }
 });
